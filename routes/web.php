@@ -5,10 +5,23 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProductShowController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 
+Route::get('/test-cart', function () {
+    dd(session('cart'));
+});
 Route::get('/', [ProductShowController::class, 'home'])->name('home');
 Route::get('/products', [ProductShowController::class, 'products'])->name('frontend.products');
 Route::get('/product/{id}', [ProductShowController::class, 'show'])->name('product.show');
+
+Route::post('/cart/add', [CartController::class, 'add']);
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/update', [CartController::class, 'update']);
+Route::post('/cart/remove', [CartController::class, 'remove']);
+
+Route::get('/checkout',[CheckoutController::class,'checkout'])->name('checkout');
+Route::post('/place-order',[CheckoutController::class,'placeOrder'])->name('place.order');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
