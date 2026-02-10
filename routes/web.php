@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', fn() => view('admin.dashboard'));
     Route::resource('/admin/categories', CategoryController::class)->names('categories');
+    Route::resource('/admin/products', ProductController::class)->names('products');
 });
 
 Route::middleware('auth')->group(function () {

@@ -5,4 +5,7 @@
     <li class="nav-item mb-2">
         <a class="nav-link text-white" href="{{ route('categories.index') }}">Category</a>
     </li>
+    <li class="nav-item mb-2">
+        <a class="nav-link text-white" href="{{ route('products.index') }}">Product</a>
+    </li>
 </ul>
