@@ -12,16 +12,23 @@ class CheckoutController extends Controller
 {
     public function checkout()
     {
+        if (!session('cart') || count(session('cart')) == 0) {
+            return redirect('/cart')->with('error', 'Your cart is empty');
+        }
+
         return view('frontend.checkout');
     }
 
     public function placeOrder(Request $request)
     {
+        if (!auth()->check()) {
+            return redirect('/login')->with('error', 'Please login to place order');
+        }
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'address' => 'required|string|max:255',
-            'payment_method' => 'required|string|in:cod'
+            'name' => 'required|min:3',
+            'phone' => 'required|regex:/^01[0-9]{9}$/',
+            'address' => 'required|min:10',
+            'payment_method' => 'required|in:cod',
         ]);
 
         $cart = session('cart');
@@ -54,6 +61,7 @@ class CheckoutController extends Controller
         }
 
         session()->forget('cart');
+        $request->session()->regenerateToken();
 
         return redirect('/')->with('success', 'Order placed successfully (Cash on Delivery)');
     }

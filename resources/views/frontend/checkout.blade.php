@@ -8,17 +8,20 @@
 
         <div class="mb-3">
             <label>Name</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" required>
+            @error('name') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
 
         <div class="mb-3">
             <label>Phone</label>
             <input type="text" name="phone" class="form-control" required>
+            @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
 
         <div class="mb-3">
             <label>Address</label>
             <textarea name="address" class="form-control" required></textarea>
+            @error('address') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
 
         <div class="mb-3">
