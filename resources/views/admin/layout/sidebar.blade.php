@@ -8,4 +8,7 @@
     <li class="nav-item mb-2">
         <a class="nav-link text-white" href="{{ route('products.index') }}">Product</a>
     </li>
+    <li class="nav-item mb-2">
+        <a class="nav-link text-white" href="{{ route('admin.orders') }}">Orders</a>
+    </li>
 </ul>
